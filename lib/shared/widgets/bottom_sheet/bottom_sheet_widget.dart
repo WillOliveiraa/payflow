@@ -5,22 +5,21 @@ import 'package:payflow/shared/themes/app_text_styles.dart';
 import 'package:payflow/shared/widgets/set_buttons/set_label_buttons.dart';
 
 class BottomSheetWidget extends StatelessWidget {
+  final String primaryLabel;
+  final VoidCallback primaryOnPressed;
+  final String secondaryLabel;
+  final VoidCallback secondaryOnPressed;
+  final String title;
+  final String subtitle;
   const BottomSheetWidget({
     Key? key,
-    required this.labelPrimary,
-    required this.onTapPrimary,
-    required this.labelSecondary,
-    required this.onTapSecondary,
+    required this.primaryLabel,
+    required this.primaryOnPressed,
+    required this.secondaryLabel,
+    required this.secondaryOnPressed,
     required this.title,
     required this.subtitle,
   }) : super(key: key);
-
-  final String labelPrimary;
-  final VoidCallback onTapPrimary;
-  final String labelSecondary;
-  final VoidCallback onTapSecondary;
-  final String title;
-  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +61,10 @@ class BottomSheetWidget extends StatelessWidget {
                   ),
                   SetLabelButtons(
                     enablePrimaryColor: true,
-                    labelPrimary: labelPrimary,
-                    onTapPrimary: onTapPrimary,
-                    labelSecondary: labelSecondary,
-                    onTapSecondary: onTapSecondary,
+                    primaryLabel: primaryLabel,
+                    primaryOnPressed: primaryOnPressed,
+                    secondaryLabel: secondaryLabel,
+                    secondaryOnPressed: secondaryOnPressed,
                   ),
                 ],
               )

@@ -50,7 +50,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
               if (status.showCamera) {
                 return Container(
                   color: Colors.blue,
-                  child: status.cameraController!.buildPreview(),
+                  child: controller.cameraController!.buildPreview(),
                 );
               } else {
                 return Container();
@@ -93,13 +93,12 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                 ],
               ),
               bottomNavigationBar: SetLabelButtons(
-                labelPrimary: "Inserir código do boleto",
-                onTapPrimary: () {
-                  // controller.status = BarcodeScannerStatus.error("Error");
+                primaryLabel: "Inserir código do boleto",
+                primaryOnPressed: () {
+                  Navigator.pushReplacementNamed(context, "/insert_boleto");
                 },
-                labelSecondary: "Adicionar da galeria",
-                onTapSecondary: () {},
-                // onTapSecondary: controller.scanWithImagePicker,
+                secondaryLabel: "Adicionar da galeria",
+                secondaryOnPressed: () {},
               ),
             ),
           ),
@@ -107,19 +106,19 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
             valueListenable: controller.statusNotifier,
             builder: (_, status, __) {
               if (status.hasError) {
-                return Align(
-                    alignment: Alignment.bottomLeft,
-                    child: BottomSheetWidget(
-                        labelPrimary: "Escanear novamente",
-                        onTapPrimary: () {
-                          controller.getAvailableCameras();
-                        },
-                        labelSecondary: "Digitar código",
-                        onTapSecondary: () {},
-                        title:
-                            "Não foi possível identificar um código de barras.",
-                        subtitle:
-                            "Tente escanear novamente ou digite o código do seu boleto."));
+                return BottomSheetWidget(
+                  title: "Não foi possível identificar um código de barras.",
+                  subtitle:
+                      "Tente escanear novamente ou digite o código do seu boleto.",
+                  primaryLabel: "Escanear novamente",
+                  primaryOnPressed: () {
+                    controller.scanWithCamera();
+                  },
+                  secondaryLabel: "Digitar código",
+                  secondaryOnPressed: () {
+                    Navigator.pushReplacementNamed(context, "/insert_boleto");
+                  },
+                );
               } else {
                 return Container();
               }

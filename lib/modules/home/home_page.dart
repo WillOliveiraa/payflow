@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payflow/modules/meus_boletos/meus_boletos_page.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 
@@ -14,9 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
   final pages = [
-    Container(
-      color: Colors.red,
-    ),
+    MeusBoletosPage(),
     Container(color: Colors.blue),
   ];
 
@@ -71,7 +70,8 @@ class _HomePageState extends State<HomePage> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/barcode_scanner");
+                Navigator.pushNamed(context, "/insert_boleto");
+                // Navigator.pushNamed(context, "/barcode_scanner");
               },
               child: Container(
                 width: 56,
